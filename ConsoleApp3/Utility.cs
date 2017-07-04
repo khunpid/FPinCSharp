@@ -21,6 +21,14 @@ namespace ProblemSolving
             }
         }
 
+        /// <summary>
+        /// This is from 
+        /// https://fuqua.io/blog/2014/03/haskells-elegant-fibonacci-in-csharp/
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
         public static IEnumerable<T> LazyConcat<T>(
             this Func<IEnumerable<T>> first,
             Func<IEnumerable<T>> second)

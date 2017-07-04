@@ -25,8 +25,5 @@ namespace ProblemSolving
             var (h, t) = Utility.Span(x => x < (first * first), theRest);
             return h.LazyConcat(() => Sieve(enumerable.Skip(1), t().Where(x => x % first != 0)));
         }
-
-
-
     }
 }
