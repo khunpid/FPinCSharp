@@ -7,17 +7,11 @@ namespace ProblemSolving
     {
         static void Main(string[] args)
         {
-            var notOver = 10000;
-            var primes = MyClass.Primes().TakeWhile(x => x < notOver);
-            Console.WriteLine("[{0}]", string.Join(", ", primes.Select(x => x.ToString())));
-            var sumPrimes = primes.Aggregate((x, y) => x + y);
-
-            Console.WriteLine("P10 (sum prime below {1})Result = {0}", sumPrimes, notOver);
-
-            foreach (var prime in MyClass.Primes())
-            {
-                Console.Write("{0}, ", prime);
-            }
+            ProjectEuler.P1();  // 166833
+            ProjectEuler.P2();  // 4613732
+            ProjectEuler.P7();  // 104743
+            ProjectEuler.P10(); // 142913828922
+            ProjectEuler.P25(); // 
         }
     }
 }

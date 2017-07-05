@@ -25,5 +25,31 @@ namespace ProblemSolving
             var (h, t) = Utility.Span(x => x < (first * first), theRest);
             return h.LazyConcat(() => Sieve(enumerable.Skip(1), t().Where(x => x % first != 0)));
         }
+
+        /*
+         fibs = 0 : 1 : zipWith (+) (fibs) (tail (fibs))
+         */
+        public static IEnumerable<BigInteger> Fibs()
+        {
+            Func<IEnumerable<BigInteger>> seedThunk = () => new BigInteger[] { 0, 1 };
+            Func<IEnumerable<BigInteger>> zipThunk = () => Fibs().Zip(Fibs().Skip(1), (x, y) => x + y);
+
+            return seedThunk.LazyConcat(zipThunk);
+        }
+
+        public static IEnumerable<BigInteger> MultipliesOf(BigInteger number)
+        {
+            return Utility.SeqFrom(number, number);
+        }
+
+        public static BigInteger Power(BigInteger n, BigInteger expo)
+        {
+            if (expo == 0) return 1;
+            if (expo == 1) return n;
+
+            return n * Power(n, expo - 1);
+
+        }
     }
+
 }

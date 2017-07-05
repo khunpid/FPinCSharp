@@ -13,13 +13,28 @@ namespace ProblemSolving
             return (() => aList.TakeWhile(pred), () => aList.SkipWhile(pred));
         }
 
-        public static IEnumerable<BigInteger> OddFrom(BigInteger v)
+        public static IEnumerable<BigInteger> SeqFrom(BigInteger v)
         {
-            for (BigInteger i = v % 2 != 0 ? v : v + 1; ; i += 2)
+            return SeqFrom(v, BigInteger.One);
+        }
+
+        public static IEnumerable<BigInteger> SeqFrom(BigInteger v, BigInteger step)
+        {
+            for (BigInteger i = v; ; i += step)
             {
                 yield return i;
             }
         }
+
+        public static IEnumerable<BigInteger> OddFrom(BigInteger v)
+        {
+            return SeqFrom(v % 2 != BigInteger.Zero ? v : v + 1, 2);
+        }
+        public static IEnumerable<BigInteger> EvenFrom(BigInteger v)
+        {
+            return SeqFrom(v % 2 == BigInteger.Zero ? v : v + 1, 2);
+        }
+
 
         /// <summary>
         /// This is from 
