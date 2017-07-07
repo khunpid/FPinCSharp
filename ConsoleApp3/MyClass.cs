@@ -34,6 +34,7 @@ namespace ProblemSolving
             Func<IEnumerable<BigInteger>> seedThunk = () => new BigInteger[] { 0, 1 };
             Func<IEnumerable<BigInteger>> zipThunk = () => Fibs().Zip(Fibs().Skip(1), (x, y) => x + y);
 
+            //return EnumerableEx.Memoize(seedThunk.LazyConcat(zipThunk));
             return seedThunk.LazyConcat(zipThunk);
         }
 
@@ -44,7 +45,6 @@ namespace ProblemSolving
 
         public static BigInteger Power(BigInteger n, BigInteger expo)
         {
-            if (expo == 0) return 1;
             if (expo == 1) return n;
 
             return n * Power(n, expo - 1);
