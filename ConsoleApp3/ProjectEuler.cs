@@ -47,5 +47,31 @@ namespace ProblemSolving
             Console.WriteLine("P25 the first Fibs over 1000 digit is {0}", theValue);
             return theValue;
         }
+
+        public static BigInteger P104()
+        {
+            var tenToNine = MyClass.Power(10, 9);
+            var theValue = MyClass.IndexFibo()
+                .Where(x => x.value > MyClass.Power(10, 10))
+                .Where(x =>
+                {
+                    var xString = x.value.ToString();
+                    var first = xString.Substring(0, 9).ToCharArray();
+                    var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
+
+                    if (isPanDigitalFirst)
+                    {
+                        var last = xString.Substring(xString.Length - 9).ToCharArray();
+                        var isPanDigitalLast = !last.Contains('0') && last.Distinct().Count() == 9;
+                        return isPanDigitalLast;
+                    }
+
+                    return false;
+                }).First();
+
+            Console.WriteLine("P104 = {0}", theValue);
+
+            return theValue.index;
+        }
     }
 }
