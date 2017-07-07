@@ -19,7 +19,7 @@ namespace ProblemSolving
         public static BigInteger P2()
         {
             var fibNotOver = 4000000;
-            var fibs = MyClass.Fibs().TakeWhile(x => x < fibNotOver).Where(x => x % 2 == 0);
+            var fibs = MyClass.Fibo().TakeWhile(x => x < fibNotOver).Where(x => x % 2 == 0);
             var sumEvenFibs = fibs.Aggregate((x, y) => x + y);
             Console.WriteLine("P2 sum even Fibs (not over {1}) [{0}]", sumEvenFibs, fibNotOver);
             return sumEvenFibs;
@@ -42,8 +42,8 @@ namespace ProblemSolving
 
         public static BigInteger P25()
         {
-            var limit = MyClass.Power(10, 8);
-            var theValue = MyClass.Fibs().Where(x => x > limit).First();
+            var limit = MyClass.Power(10, 999);
+            var theValue = MyClass.IndexFibo().Where(x => x.value > limit).First().index;
             Console.WriteLine("P25 the first Fibs over 1000 digit is {0}", theValue);
             return theValue;
         }

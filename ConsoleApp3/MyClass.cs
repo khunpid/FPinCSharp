@@ -31,11 +31,51 @@ namespace ProblemSolving
          */
         public static IEnumerable<BigInteger> Fibs()
         {
+            IEnumerable<BigInteger> fib = null;
             Func<IEnumerable<BigInteger>> seedThunk = () => new BigInteger[] { 0, 1 };
-            Func<IEnumerable<BigInteger>> zipThunk = () => Fibs().Zip(Fibs().Skip(1), (x, y) => x + y);
+            Func<IEnumerable<BigInteger>> zipThunk = () => fib.Zip(fib.Skip(1), (x, y) => x + y);
 
-            //return EnumerableEx.Memoize(seedThunk.LazyConcat(zipThunk));
-            return seedThunk.LazyConcat(zipThunk);
+            fib = seedThunk.LazyConcat(zipThunk);
+            foreach (var item in fib)
+            {
+                System.Console.Write($"{item}, ");
+                yield return item;
+            }
+
+        }
+
+        public static IEnumerable<(BigInteger index, BigInteger value)> IndexFibo()
+        {
+            for (BigInteger i = 0; ; i++)
+            {
+                yield return (i, Fibonacci(i));
+            }
+        }
+
+        public static IEnumerable<BigInteger> Fibo()
+        {
+            for (BigInteger i = 0; ; i++)
+            {
+                yield return Fibonacci(i);
+            }
+        }
+
+
+
+        private static Dictionary<BigInteger, BigInteger> FibDict = new Dictionary<BigInteger, BigInteger>();
+       
+        public static BigInteger Fibonacci(BigInteger current)
+        {
+            if (current >= 0 && current < 2)
+            {
+                if (!FibDict.ContainsKey(current)) FibDict.Add(current, current);
+            }
+            else
+            {
+                if (!FibDict.ContainsKey(current)) FibDict.Add(current, FibDict[current - 1] + FibDict[current - 2]);
+            }
+
+            return FibDict[current];
         }
 
         public static IEnumerable<BigInteger> MultipliesOf(BigInteger number)

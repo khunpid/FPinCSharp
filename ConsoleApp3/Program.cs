@@ -12,6 +12,8 @@ namespace ProblemSolving
             ProjectEuler.P7();  // 104743
             ProjectEuler.P10(); // 142913828922
             ProjectEuler.P25(); // 4782
+
+            ///ProjectEuler.XXX();
         }
     }
 }
