@@ -54,7 +54,8 @@ namespace ProblemSolving
 
         public static IEnumerable<(BigInteger index, BigInteger value)> IndexFibo2()
         {
-            for (BigInteger i = 0; ; i++)
+            yield return (0, 0);
+            for (BigInteger i = 1; ; i++)
             {
                 yield return (i, Fibonacci2(i).current);
             }
@@ -99,14 +100,15 @@ namespace ProblemSolving
 
         public static IEnumerable<BigInteger> Fibo2()
         {
-            for (BigInteger i = 0; ; i++)
+            yield return 0;
+            for (BigInteger i = 1; ; i++)
             {
                 yield return Fibonacci2(i).current;
             }
         }
         /*
          * 
-            fib :: Integer -> (Integer, Integer)
+            fib :: Integer -> (Integer, Integer) 
             fib 0 = (0, 1)
             fib n =
 	            let (a, b) = fib (div n 2)
@@ -120,24 +122,34 @@ namespace ProblemSolving
         {
             if (n == 0)
             {
-                if (!FibDict.ContainsKey(0)) FibDict[0] = 1;
+                if (!FibDict.ContainsKey(0)) FibDict[0] = 0;
+                if (!FibDict.ContainsKey(1)) FibDict[1] = 1;
                 return (0, 1);
             }
 
-            if (FibDict.ContainsKey(n) && FibDict.ContainsKey(n - 1)) return (FibDict[n], FibDict[n - 1]);
+            if (n == 1)
+            {
+                if (!FibDict.ContainsKey(2)) FibDict[2] = 1;
+                return (1, 1);
+            }
+
+            if (FibDict.ContainsKey(n) && FibDict.ContainsKey(n + 1)) return (FibDict[n], FibDict[n + 1]);
 
             var (a, b) = Fibonacci2(n / 2);
-            var c = a * (b * 2 - 1);
+            var c = a * (b * 2 - a);
             var d = a * a + b * b;
 
             if (n % 2 == 0)
             {
-                FibDict.Add(n, c);
+                if (!FibDict.ContainsKey(n)) FibDict.Add(n, c);
+                if (!FibDict.ContainsKey(n + 1)) FibDict.Add(n + 1, d);
+
                 return (c, d);
             }
             else
             {
-                FibDict.Add(n, d);
+                if (!FibDict.ContainsKey(n)) FibDict.Add(n, d);
+                if (!FibDict.ContainsKey(n + 1)) FibDict.Add(n + 1, c + d);
                 return (d, c + d);
             }
         }

@@ -13,8 +13,8 @@ namespace ProblemSolving
             //ProjectEuler.P10(); // 142913828922
             //ProjectEuler.P25(); // 4782
             ProjectEuler.P104_2(); //
-            var x = MyClass.Fibonacci2(100000);
-            Console.WriteLine("{0}", x);
+            //var x = MyClass.Fibonacci2(100000);
+            //Console.WriteLine("{0}", x);
             ///ProjectEuler.XXX();
         }
     }

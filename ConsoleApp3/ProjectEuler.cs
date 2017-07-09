@@ -78,21 +78,27 @@ namespace ProblemSolving
 
         public static BigInteger P104_2()
         {
+            //var theValue = MyClass.IndexFibo2()
+            //   .TakeWhile(x => x.value < MyClass.Power(10, 2));
+
+
             var tenToNine = MyClass.Power(10, 9);
             var theValue = MyClass.IndexFibo2()
                 .Where(x => x.value > MyClass.Power(10, 10))
                 .Where(x =>
                 {
                     var xString = x.value.ToString();
-                    var last = xString.Substring(xString.Length - 9).ToCharArray();
+
+                    var lastString = xString.Substring(xString.Length - 9);
+                    var last = lastString.ToCharArray();
                     var isPanDigitalLast = !last.Contains('0') && last.Distinct().Count() == 9;
 
                     if (isPanDigitalLast)
                     {
-                        Console.WriteLine("last 9 = {0}", x);
-
-                        var first = xString.Substring(0, 9).ToCharArray();
+                        var firstString = xString.Substring(0, 9);
+                        var first = firstString.ToCharArray();
                         var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
+                        Console.WriteLine("{0,10} - {1}....{2}", x.index, firstString, lastString);
                         return isPanDigitalFirst;
                     }
 
