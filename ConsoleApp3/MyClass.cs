@@ -52,6 +52,14 @@ namespace ProblemSolving
             }
         }
 
+        public static IEnumerable<(BigInteger index, BigInteger value)> IndexFibo2()
+        {
+            for (BigInteger i = 0; ; i++)
+            {
+                yield return (i, Fibonacci2(i).current);
+            }
+        }
+
         public static IEnumerable<BigInteger> Fibo()
         {
             for (BigInteger i = 0; ; i++)
@@ -59,8 +67,6 @@ namespace ProblemSolving
                 yield return Fibonacci(i);
             }
         }
-
-
 
         private static Dictionary<BigInteger, BigInteger> FibDict = new Dictionary<BigInteger, BigInteger>();
        
@@ -89,6 +95,51 @@ namespace ProblemSolving
 
             return n * Power(n, expo - 1);
 
+        }
+
+        public static IEnumerable<BigInteger> Fibo2()
+        {
+            for (BigInteger i = 0; ; i++)
+            {
+                yield return Fibonacci2(i).current;
+            }
+        }
+        /*
+         * 
+            fib :: Integer -> (Integer, Integer)
+            fib 0 = (0, 1)
+            fib n =
+	            let (a, b) = fib (div n 2)
+	                c = a * (b * 2 - a)
+	                d = a * a + b * b
+	            in if mod n 2 == 0
+		            then (c, d)
+		            else (d, c + d)
+         */
+        public static (BigInteger current, BigInteger prev) Fibonacci2(BigInteger n)
+        {
+            if (n == 0)
+            {
+                if (!FibDict.ContainsKey(0)) FibDict[0] = 1;
+                return (0, 1);
+            }
+
+            if (FibDict.ContainsKey(n) && FibDict.ContainsKey(n - 1)) return (FibDict[n], FibDict[n - 1]);
+
+            var (a, b) = Fibonacci2(n / 2);
+            var c = a * (b * 2 - 1);
+            var d = a * a + b * b;
+
+            if (n % 2 == 0)
+            {
+                FibDict.Add(n, c);
+                return (c, d);
+            }
+            else
+            {
+                FibDict.Add(n, d);
+                return (d, c + d);
+            }
         }
     }
 

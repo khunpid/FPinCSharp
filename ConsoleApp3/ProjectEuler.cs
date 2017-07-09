@@ -12,7 +12,7 @@ namespace ProblemSolving
         {
             var notOver = 1000;
             var result = MyClass.MultipliesOf(3).Union(MyClass.MultipliesOf(5)).TakeWhile(n => n < notOver).Aggregate((x, y) => x + y);
-            Console.WriteLine("P1 sum = {0}", result); 
+            Console.WriteLine("P1 sum = {0}", result);
 
             return result;
         }
@@ -56,14 +56,44 @@ namespace ProblemSolving
                 .Where(x =>
                 {
                     var xString = x.value.ToString();
-                    var first = xString.Substring(0, 9).ToCharArray();
-                    var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
+                    var last = xString.Substring(xString.Length - 9).ToCharArray();
+                    var isPanDigitalLast = !last.Contains('0') && last.Distinct().Count() == 9;
 
-                    if (isPanDigitalFirst)
+                    if (isPanDigitalLast)
                     {
-                        var last = xString.Substring(xString.Length - 9).ToCharArray();
-                        var isPanDigitalLast = !last.Contains('0') && last.Distinct().Count() == 9;
-                        return isPanDigitalLast;
+                        Console.WriteLine("last 9 = {0}", x);
+
+                        var first = xString.Substring(0, 9).ToCharArray();
+                        var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
+                        return isPanDigitalFirst;
+                    }
+
+                    return false;
+                }).First();
+
+            Console.WriteLine("P104 = {0}", theValue);
+
+            return theValue.index;
+        }
+
+        public static BigInteger P104_2()
+        {
+            var tenToNine = MyClass.Power(10, 9);
+            var theValue = MyClass.IndexFibo2()
+                .Where(x => x.value > MyClass.Power(10, 10))
+                .Where(x =>
+                {
+                    var xString = x.value.ToString();
+                    var last = xString.Substring(xString.Length - 9).ToCharArray();
+                    var isPanDigitalLast = !last.Contains('0') && last.Distinct().Count() == 9;
+
+                    if (isPanDigitalLast)
+                    {
+                        Console.WriteLine("last 9 = {0}", x);
+
+                        var first = xString.Substring(0, 9).ToCharArray();
+                        var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
+                        return isPanDigitalFirst;
                     }
 
                     return false;
