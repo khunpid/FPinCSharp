@@ -182,7 +182,7 @@ namespace ProblemSolving
         {
             var nCharArray = n.ToCharArray();
             return nCharArray.Length == digit && !nCharArray.Contains('0') 
-                && nCharArray.Select(x => Convert.ToInt32(x))
+                && nCharArray.Select(x => Convert.ToInt32(x.ToString()))
                     .Intersect(Utility.SeqFrom(1).Take(digit).Select(x => (int)x)).Count() == digit;
         }
     }
