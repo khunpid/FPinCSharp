@@ -166,6 +166,25 @@ namespace ProblemSolving
                 return (d, c + d);
             }
         }
+
+        public static bool IsPanDigital(this BigInteger n)
+        {
+            return IsPanDigital(n.ToString());
+        }
+
+        public static bool IsPanDigital(this string n)
+        {
+            var nCharArray = n.ToCharArray();
+            return nCharArray.Length == 9 && !nCharArray.Contains('0') && nCharArray.Distinct().Count() == 9;
+        }
+
+        public static bool IsPanDigital(this string n, int digit)
+        {
+            var nCharArray = n.ToCharArray();
+            return nCharArray.Length == digit && !nCharArray.Contains('0') 
+                && nCharArray.Select(x => Convert.ToInt32(x))
+                    .Intersect(Utility.SeqFrom(1).Take(digit).Select(x => (int)x)).Count() == digit;
+        }
     }
 
 }

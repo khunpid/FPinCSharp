@@ -62,7 +62,7 @@ namespace ProblemSolving
 
         private static int Triangle(int i, int j)
         {
-            if (i >= lines.Count() || j >= lines.Count() || i < 0 || j < 0) return 0;
+            if (i >= lines.Count() || j >= lines.Count() - 1 || i < 0 || j < 0) return 0;
 
             var lineCount = lines.Count();
             return Convert.ToInt32(lines[i].Split(' ')[j].ToString());
@@ -71,27 +71,37 @@ namespace ProblemSolving
         private static int SumMax(int i, int j)
         {
             if (i >= lines.Count() || j >= lines.Count()) return 0;
-            return Triangle(i, j) + Math.Max(SumMax(i + 1, j), SumMax(i + 1, j + 1));
+
+            Func<int> left = () => SumMax(i + 1, j);
+            Func<int> right = () => SumMax(i + 1, j + 1);
+
+            //Parallel.Invoke(() => SumMax(i + 1, j), () => SumMax(i + 1, j + 1));
+
+            return Triangle(i, j) + Math.Max(left(), right());
         }
 
         public static int P67()
         {
             lines = File.ReadAllLines("p067_triangle.txt");
 
-            var x = SumMaxUp(lines.Length - 1, lines.Length - 1);
+            var max = SumMax(0, 0);
 
-            return 0;
+            return max;
         }
 
-        private static int SumMaxUp(int i, int j)
-        {
-            if (i <= 0 || j <= 0) return 0;
-            var lineInts = lines[i].Split(' ').Select(x => Convert.ToInt32(x.ToString())).Select(x => x + Math.Max(Triangle(i - 1, j), Triangle(i - 1, j - 1)));
+        //private static int SumMaxUp(int i, int j)
+        //{
+        //    if (i <= 90 || j <= 98) return 0;
+        //    var lineInts = lines[i].Split(' ').Select(x => Convert.ToInt32(x.ToString())).Select(x => 
+        //    {
+        //        Console.WriteLine($"[{Task.CurrentId}]:{i},{j}");
+        //        return x + Math.Max(SumMaxUp(i - 1, j), SumMaxUp(i - 1, j - 1));
+        //    });
 
-            lineInts.ToList().ForEach(x => Console.WriteLine("--{x},"));
+        //    //lineInts.ToList().ForEach(x => Console.Write($"--{x},"));
 
-            return lineInts.Max();
-        }
+        //    return lineInts.Max();
+        //}
 
         public static BigInteger P104()
         {
@@ -129,22 +139,21 @@ namespace ProblemSolving
 
 
             var tenToNine = MyClass.Power(10, 9);
-            var theValue = MyClass.IndexFibo2()
-                .AsParallel()
-                .Where(x => x.value > MyClass.Power(10, 10))
+            var theValue = MyClass.IndexFibo2().SkipWhile(x => x.index < (BigInteger)(300000)).AsParallel()
+
+                //.Where(x => x.value > MyClass.Power(10, 10))
+                //var theValue = new[] { (index: 329468, value: MyClass.Fibonacci2(329468).current) } 
                 .Where(x =>
                 {
                     var xString = x.value.ToString();
 
                     var lastString = xString.Substring(xString.Length - 9);
-                    var last = lastString.ToCharArray();
-                    var isPanDigitalLast = !last.Contains('0') && last.Distinct().Count() == 9;
+                    var isPanDigitalLast = MyClass.IsPanDigital(lastString);
 
                     if (isPanDigitalLast)
                     {
                         var firstString = xString.Substring(0, 9);
-                        var first = firstString.ToCharArray();
-                        var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
+                        var isPanDigitalFirst = MyClass.IsPanDigital(firstString);
                         Console.WriteLine("[{3,5}]:{0,10} - {1}....{2}", x.index, firstString, lastString, Task.CurrentId);
                         return isPanDigitalFirst;
                     }
@@ -156,5 +165,31 @@ namespace ProblemSolving
 
             return theValue.index;
         }
+
+        public static BigInteger P19()
+        {
+            var firstDate = new DateTime(1900, 1, 1);
+            var startDate = new DateTime(1901, 1, 1);
+            var endDate = new DateTime(2000, 12, 31);
+            
+            var sundayFirstCount = FromTo(startDate, endDate).Where((x, y) => x.date == 1 && x.dow == DayOfWeek.Sunday).Count();
+            Console.WriteLine($"P19: {sundayFirstCount}");
+
+            return sundayFirstCount;
+        }
+
+        private static IEnumerable<(int date, DayOfWeek dow)> FromTo(DateTime start, DateTime end)
+        {
+            var date = start;
+            while((date = date.AddDays(1)) < end)
+            {
+                yield return (date.Day, date.DayOfWeek);
+            }
+        }
+
+        //public BigInteger P41()
+        //{
+        //    MyClass.Primes2().TakeWhile(x => x < MyClass.Power(10, 10)).
+        //}
     }
 }
