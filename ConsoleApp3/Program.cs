@@ -1,21 +1,23 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 
 namespace ProblemSolving
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            //ProjectEuler.P1();  // 166833
-            //ProjectEuler.P2();  // 4613732
-            //ProjectEuler.P7();  // 104743
-            //ProjectEuler.P10(); // 142913828922
-            //ProjectEuler.P25(); // 4782
-            ProjectEuler.P104_2(); //
-            //var x = MyClass.Fibonacci2(100000);
-            //Console.WriteLine("{0}", x);
-            ///ProjectEuler.XXX();
+            //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P1()).ReportTime();        // 166833
+            //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P2()).ReportTime();        // 4613732
+            //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P7()).ReportTime();        // 104743
+            //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P10()).ReportTime();       // 142913828922
+            //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P18()).ReportTime();         // 1074
+            //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P25()).ReportTime();       // 4782
+            MeasureAndReport.MeasureRunTime(() => ProjectEuler.P67()).ReportTime();         // 
+            //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P104_2()).ReportTime();    // 329468
         }
+
     }
 }

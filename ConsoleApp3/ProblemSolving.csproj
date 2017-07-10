@@ -13,4 +13,13 @@
     <PackageReference Include="System.ValueTuple" Version="4.4.0-preview2-25405-01" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="p067_triangle.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="p018_triangle.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

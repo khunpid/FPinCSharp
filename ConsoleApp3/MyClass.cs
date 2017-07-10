@@ -25,6 +25,20 @@ namespace ProblemSolving
             var (h, t) = Utility.Span(x => x < (first * first), theRest);
             return h.LazyConcat(() => Sieve(enumerable.Skip(1), t().Where(x => x % first != 0)));
         }
+        public static IEnumerable<BigInteger> Primes2()
+        {
+            Func<IEnumerable<BigInteger>> seedThunk = () => new BigInteger[] { 2, 3 };
+            Func<IEnumerable<BigInteger>> sieveThunk = () => Sieve2(() => Primes2().Skip(1), () => Utility.OddFrom(5));
+
+            return seedThunk.LazyConcat(sieveThunk);
+        }
+        private static IEnumerable<BigInteger> Sieve2(Func<IEnumerable<BigInteger>> enumerable, Func<IEnumerable<BigInteger>> theRest)
+        {
+            var first = enumerable().First();
+            var (h, t) = Utility.Span(x => x < (first * first), theRest());
+            //Console.WriteLine("--{0}--, ", string.Join(",", h().Select(x => x.ToString())));
+            return h.LazyConcat(() => Sieve2(() => enumerable().Skip(1), () => t().Where(x => x % first != 0)));
+        }
 
         /*
          fibs = 0 : 1 : zipWith (+) (fibs) (tail (fibs))
@@ -41,7 +55,6 @@ namespace ProblemSolving
                 System.Console.Write($"{item}, ");
                 yield return item;
             }
-
         }
 
         public static IEnumerable<(BigInteger index, BigInteger value)> IndexFibo()

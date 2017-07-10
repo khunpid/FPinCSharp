@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ProblemSolving
 {
@@ -48,10 +50,54 @@ namespace ProblemSolving
             return theValue;
         }
 
+        private static string[] lines;
+        public static int P18()
+        {
+            lines = File.ReadAllLines("p018_triangle.txt");
+
+            var max = SumMax(0, 0);
+
+            return max;
+        }
+
+        private static int Triangle(int i, int j)
+        {
+            if (i >= lines.Count() || j >= lines.Count() || i < 0 || j < 0) return 0;
+
+            var lineCount = lines.Count();
+            return Convert.ToInt32(lines[i].Split(' ')[j].ToString());
+        }
+
+        private static int SumMax(int i, int j)
+        {
+            if (i >= lines.Count() || j >= lines.Count()) return 0;
+            return Triangle(i, j) + Math.Max(SumMax(i + 1, j), SumMax(i + 1, j + 1));
+        }
+
+        public static int P67()
+        {
+            lines = File.ReadAllLines("p067_triangle.txt");
+
+            var x = SumMaxUp(lines.Length - 1, lines.Length - 1);
+
+            return 0;
+        }
+
+        private static int SumMaxUp(int i, int j)
+        {
+            if (i <= 0 || j <= 0) return 0;
+            var lineInts = lines[i].Split(' ').Select(x => Convert.ToInt32(x.ToString())).Select(x => x + Math.Max(Triangle(i - 1, j), Triangle(i - 1, j - 1)));
+
+            lineInts.ToList().ForEach(x => Console.WriteLine("--{x},"));
+
+            return lineInts.Max();
+        }
+
         public static BigInteger P104()
         {
             var tenToNine = MyClass.Power(10, 9);
             var theValue = MyClass.IndexFibo()
+                .AsParallel()
                 .Where(x => x.value > MyClass.Power(10, 10))
                 .Where(x =>
                 {
@@ -61,7 +107,7 @@ namespace ProblemSolving
 
                     if (isPanDigitalLast)
                     {
-                        Console.WriteLine("last 9 = {0}", x);
+                        Console.WriteLine("[{1,5}]: last 9 = {0}", x, Task.CurrentId);
 
                         var first = xString.Substring(0, 9).ToCharArray();
                         var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
@@ -84,6 +130,7 @@ namespace ProblemSolving
 
             var tenToNine = MyClass.Power(10, 9);
             var theValue = MyClass.IndexFibo2()
+                .AsParallel()
                 .Where(x => x.value > MyClass.Power(10, 10))
                 .Where(x =>
                 {
@@ -98,7 +145,7 @@ namespace ProblemSolving
                         var firstString = xString.Substring(0, 9);
                         var first = firstString.ToCharArray();
                         var isPanDigitalFirst = !first.Contains('0') && first.Distinct().Count() == 9;
-                        Console.WriteLine("{0,10} - {1}....{2}", x.index, firstString, lastString);
+                        Console.WriteLine("[{3,5}]:{0,10} - {1}....{2}", x.index, firstString, lastString, Task.CurrentId);
                         return isPanDigitalFirst;
                     }
 
