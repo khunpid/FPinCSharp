@@ -18,7 +18,7 @@ namespace ProblemSolving
             //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P25()).ReportTime();       // 4782
             //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P67()).ReportTime();         // 
             MeasureAndReport.MeasureRunTime(() => ProjectEuler.P104_2()).ReportTime();    // 329468 - 245681739....352786941
-            Console.ReadKey();
+            //Console.ReadLine();
         }
 
     }

@@ -172,18 +172,15 @@ namespace ProblemSolving
             return IsPanDigital(n.ToString());
         }
 
-        public static bool IsPanDigital(this string n)
+        public static bool IsPanDigital(this string n, int digit = 9)
         {
             var nCharArray = n.ToCharArray();
-            return nCharArray.Length == 9 && !nCharArray.Contains('0') && nCharArray.Distinct().Count() == 9;
-        }
+            if ((nCharArray.Length != digit) || nCharArray.Contains('0'))  return false;
 
-        public static bool IsPanDigital(this string n, int digit)
-        {
-            var nCharArray = n.ToCharArray();
-            return nCharArray.Length == digit && !nCharArray.Contains('0') 
-                && nCharArray.Select(x => Convert.ToInt32(x.ToString()))
-                    .Intersect(Utility.SeqFrom(1).Take(digit).Select(x => (int)x)).Count() == digit;
+            if (digit == 9) return  nCharArray.Distinct().Count() == 9;
+
+            return nCharArray.Select(x => Convert.ToInt32(x.ToString()))
+                        .Intersect(Utility.SeqFromTo(1, digit).Select(x => (int)x)).Count() == digit;
         }
     }
 

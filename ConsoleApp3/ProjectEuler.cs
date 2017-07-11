@@ -139,10 +139,12 @@ namespace ProblemSolving
 
 
             var tenToNine = MyClass.Power(10, 9);
-            var theValue = MyClass.IndexFibo2().SkipWhile(x => x.index < (BigInteger)(300000)).AsParallel()
-
+            var theValue = MyClass.IndexFibo2().AsParallel()
+                .SkipWhile(x => x.value < MyClass.Power(10, 10))
+                //.TakeWhile(x => x.index < 100)
                 //.Where(x => x.value > MyClass.Power(10, 10))
                 //var theValue = new[] { (index: 329468, value: MyClass.Fibonacci2(329468).current) } 
+                .AsParallel()                
                 .Where(x =>
                 {
                     var xString = x.value.ToString();
@@ -154,16 +156,18 @@ namespace ProblemSolving
                     {
                         var firstString = xString.Substring(0, 9);
                         var isPanDigitalFirst = MyClass.IsPanDigital(firstString);
-                        Console.WriteLine("[{3,5}]:{0,10} - {1}....{2}", x.index, firstString, lastString, Task.CurrentId);
+                        Console.WriteLine("[{3,5}]:{0,10} - {1,9}....{2,9}, digits = {4,6} [{5}]", x.index, firstString, lastString, Task.CurrentId, xString.Length, isPanDigitalLast);
                         return isPanDigitalFirst;
                     }
 
-                    return false;
-                }).First();
+                    Console.WriteLine("[{3,5}]:{0,10} - {1,9}....{2,9}, digits = {4,6} [{5}]", x.index, "---------", "---------", Task.CurrentId, xString.Length, false);
+                    return xString.Length > MyClass.Power(10, 100);
+                }).Take(1);
 
-            Console.WriteLine("P104 = {0}", theValue);
+            Console.WriteLine("P104 = {0}", theValue.Count());
 
-            return theValue.index;
+            //return theValue.index;
+            return theValue.Count();
         }
 
         public static BigInteger P19()

@@ -12,6 +12,14 @@ namespace ProblemSolving
         {
             return (() => aList.TakeWhile(pred), () => aList.SkipWhile(pred));
         }
+        public static IEnumerable<BigInteger> SeqFromTo(BigInteger from, BigInteger to, BigInteger step)
+        {
+            return SeqFrom(from, step).TakeWhile(x => x <= to);
+        }
+            public static IEnumerable<BigInteger> SeqFromTo(BigInteger from, BigInteger to)
+        {
+            return SeqFromTo(from, to, BigInteger.One);
+        }
 
         public static IEnumerable<BigInteger> SeqFrom(BigInteger v)
         {
