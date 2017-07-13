@@ -182,23 +182,22 @@ namespace ProblemSolving
             return nCharArray.Select(x => Convert.ToInt32(x.ToString()))
                         .Intersect(Utility.SeqFromTo(1, digit).Select(x => (int)x)).Count() == digit;
         }
-    }
 
-    public static IEnumerable<BigInteger> PrimeFactorize(BigInteger number)
-    {
-        return Factorize(number, () => MyClass.Primes2());
-    }
+        public static IEnumerable<BigInteger> PrimeFactorize(BigInteger number)
+        {
+            return Factorize(number, () => MyClass.Primes2());
+        }
 
-    public static IEnumerable<BigInteger> NumberFactorize(BigInteger number)
-    {
-        return Factorize(number, () => Utility.SeqFrom(2));
-    }
+        public static IEnumerable<BigInteger> NumberFactorize(BigInteger number)
+        {
+            return Factorize(number, () => Utility.SeqFrom(2));
+        }
 
-    public static IEnumerable<BigInteger> Factorize(BigInteger number, Func<IEnumerable<BigInteger>> factor)
-    {
-        var numberList = factor().TakeWhile(x => x <= number / 2);
-        var factorizer = new[] { BigInteger.One }.Concat(numberList.AsParallel().Where(x => number % x == 0));
-        return factorizer;
+        public static IEnumerable<BigInteger> Factorize(BigInteger number, Func<IEnumerable<BigInteger>> factor)
+        {
+            var numberList = factor().TakeWhile(x => x <= number / 2);
+            var factorizer = new[] { BigInteger.One }.Concat(numberList.AsParallel().Where(x => number % x == 0));
+            return factorizer;
+        }
     }
-
 }
