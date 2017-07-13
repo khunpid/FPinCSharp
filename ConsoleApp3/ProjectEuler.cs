@@ -176,19 +176,29 @@ namespace ProblemSolving
             var startDate = new DateTime(1901, 1, 1);
             var endDate = new DateTime(2000, 12, 31);
             
-            var sundayFirstCount = FromTo(startDate, endDate).Where((x, y) => x.date == 1 && x.dow == DayOfWeek.Sunday).Count();
+            var sundayFirstCount = DateSeqFromTo(startDate, endDate).Where(x => x.day == 1 && x.dow == DayOfWeek.Sunday).Count();
             Console.WriteLine($"P19: {sundayFirstCount}");
 
             return sundayFirstCount;
         }
 
-        private static IEnumerable<(int date, DayOfWeek dow)> FromTo(DateTime start, DateTime end)
+        private static IEnumerable<(int year, int month, int day, DayOfWeek dow)> DateSeqFrom(DateTime start)
         {
             var date = start;
-            while((date = date.AddDays(1)) < end)
+            do
             {
-                yield return (date.Day, date.DayOfWeek);
-            }
+                yield return (date.Year, date.Month, date.Day, date.DayOfWeek);
+                date.AddDays(1);
+            } while (true) ;
+        }
+
+        private static IEnumerable<(int year, int month, int day, DayOfWeek dow)> DateSeqFromTo(DateTime start, DateTime end)
+        {
+            var date = start;
+            do
+            {
+                yield return (date.Year, date.Month, date.Day, date.DayOfWeek);
+            } while ((date = date.AddDays(1)) < end);
         }
 
         //public BigInteger P41()

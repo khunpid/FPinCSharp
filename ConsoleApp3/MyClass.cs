@@ -184,4 +184,21 @@ namespace ProblemSolving
         }
     }
 
+    public static IEnumerable<BigInteger> PrimeFactorize(BigInteger number)
+    {
+        return Factorize(number, () => MyClass.Primes2());
+    }
+
+    public static IEnumerable<BigInteger> NumberFactorize(BigInteger number)
+    {
+        return Factorize(number, () => Utility.SeqFrom(2));
+    }
+
+    public static IEnumerable<BigInteger> Factorize(BigInteger number, Func<IEnumerable<BigInteger>> factor)
+    {
+        var numberList = factor().TakeWhile(x => x <= number / 2);
+        var factorizer = new[] { BigInteger.One }.Concat(numberList.AsParallel().Where(x => number % x == 0));
+        return factorizer;
+    }
+
 }
