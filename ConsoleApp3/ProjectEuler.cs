@@ -137,10 +137,11 @@ namespace ProblemSolving
             //var theValue = MyClass.IndexFibo2()
             //   .TakeWhile(x => x.value < MyClass.Power(10, 2));
 
+            var digit = 5;
 
             var tenToNine = MyClass.Power(10, 9);
             var theValue = MyClass.IndexFibo2().AsParallel()
-                .SkipWhile(x => x.value < MyClass.Power(10, 10))
+                .SkipWhile(x => x.value < MyClass.Power(10, digit + 1))
                 //.TakeWhile(x => x.index < 100)
                 //.Where(x => x.value > MyClass.Power(10, 10))
                 //var theValue = new[] { (index: 329468, value: MyClass.Fibonacci2(329468).current) } 
@@ -149,18 +150,18 @@ namespace ProblemSolving
                 {
                     var xString = x.value.ToString();
 
-                    var lastString = xString.Substring(xString.Length - 9);
-                    var isPanDigitalLast = MyClass.IsPanDigital(lastString);
+                    var lastString = xString.Substring(xString.Length - digit);
+                    var isPanDigitalLast = MyClass.IsPanDigital(lastString, digit);
 
                     if (isPanDigitalLast)
                     {
-                        var firstString = xString.Substring(0, 9);
-                        var isPanDigitalFirst = MyClass.IsPanDigital(firstString);
-                        Console.WriteLine("[{3,5}]:{0,10} - {1,9}....{2,9}, digits = {4,6} [{5}]", x.index, firstString, lastString, Task.CurrentId, xString.Length, isPanDigitalLast);
+                        var firstString = xString.Substring(0, digit);
+                        var isPanDigitalFirst = MyClass.IsPanDigital(firstString, digit);
+                        Console.WriteLine("[{3,5}]:{0,10} - {1,9}....{2,9}, digits = {4,6} [{6}, {5}]", x.index, firstString, lastString, Task.CurrentId, xString.Length, isPanDigitalLast, isPanDigitalFirst);
                         return isPanDigitalFirst;
                     }
 
-                    Console.WriteLine("[{3,5}]:{0,10} - {1,9}....{2,9}, digits = {4,6} [{5}]", x.index, "---------", "---------", Task.CurrentId, xString.Length, false);
+                    //Console.WriteLine("[{3,5}]:{0,10} - {1,9}....{2,9}, digits = {4,6} [{5}]", x.index, "---------", "---------", Task.CurrentId, xString.Length, false);
                     return xString.Length > MyClass.Power(10, 100);
                 }).Take(1);
 

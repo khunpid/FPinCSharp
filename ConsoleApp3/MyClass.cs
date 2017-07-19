@@ -182,23 +182,48 @@ namespace ProblemSolving
             return nCharArray.Select(x => Convert.ToInt32(x.ToString()))
                         .Intersect(Utility.SeqFromTo(1, digit).Select(x => (int)x)).Count() == digit;
         }
-    }
 
-    public static IEnumerable<BigInteger> PrimeFactorize(BigInteger number)
-    {
-        return Factorize(number, () => MyClass.Primes2());
-    }
+        
+        public static IEnumerable<BigInteger> PrimeFactorize(this BigInteger number)
+        {
+            return Factorize(number, () => MyClass.Primes2());
+        }
 
-    public static IEnumerable<BigInteger> NumberFactorize(BigInteger number)
-    {
-        return Factorize(number, () => Utility.SeqFrom(2));
-    }
+        public static IEnumerable<BigInteger> NumberFactorize(this BigInteger number)
+        {
+            return Factorize(number, () => Utility.SeqFrom(2));
+        }
 
-    public static IEnumerable<BigInteger> Factorize(BigInteger number, Func<IEnumerable<BigInteger>> factor)
-    {
-        var numberList = factor().TakeWhile(x => x <= number / 2);
-        var factorizer = new[] { BigInteger.One }.Concat(numberList.AsParallel().Where(x => number % x == 0));
-        return factorizer;
+        public static IEnumerable<BigInteger> Factorize(BigInteger number, Func<IEnumerable<BigInteger>> factor)
+        {
+            var numberList = factor().TakeWhile(x => x <= number / 2);
+            var factorizer = new[] { BigInteger.One }.Concat(numberList.AsParallel().Where(x => number % x == 0));
+            return factorizer;
+        }
+
+
+        public static IEnumerable<BigInteger> PrimeFactorize2(this BigInteger number)
+        {
+            var firstPart = Factorize2(number, () => MyClass.Primes2().TakeWhile(x => x + x <= number)).Skip(1);
+            return firstPart.Union(firstPart.Select(x => number / x)).OrderBy(x => x);
+        }
+
+        public static IEnumerable<BigInteger> NumberFactorize2(this BigInteger number)
+        {
+            var firstPart = Factorize2(number, () => Utility.SeqFrom(2).TakeWhile(x => x + x <= number));
+            return firstPart.Union(firstPart.Select(x => number / x)).OrderBy(x => x);
+        }
+        public static IEnumerable<BigInteger> Factorize2(BigInteger number, Func<IEnumerable<BigInteger>> factor)
+        {
+            var numberList = factor();
+            var factorizer = new[] { BigInteger.One }.Concat(numberList.AsParallel().Where(x => number % x == 0));
+            return factorizer;
+        }
+
+        public static string StringJoin(this IEnumerable<string> list, string separator = ",")
+        {
+            return string.Join(",", list);
+        }
     }
 
 }
