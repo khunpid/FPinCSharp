@@ -44,9 +44,16 @@ namespace ProblemSolving
 
         public static BigInteger P23()
         {
-            var perfectList = Utility.SeqFromTo(2, 28123).Where(x => MyClass.NumberFactorize2(x).Aggregate((a, b) => a + b) == x);
-            perfectList.Print("Perfect Number List");
-            return perfectList.Last();
+            var perfectList = Utility.SeqFromTo(2, 28123).Select(x =>
+            {
+                var val = MyClass.NumberFactorize2(x).Aggregate((a, b) => a + b);
+                if (val == x) return (0, val);
+                else if (val < x) return (-1, val);
+                else return (1, val);
+
+            });
+            perfectList.Where(x => x.Item1 == 0).Print("Perfect Number List");
+            return perfectList.Last().Item2;
         }
 
         public static BigInteger P25()
