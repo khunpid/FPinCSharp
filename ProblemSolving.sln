@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProblemSolving", "ConsoleAp
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp", "FSharp\FSharp.fsproj", "{8BB5C921-2B24-4AD7-9767-431133C4FBA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalProgramming", "C:\Users\Worawit\Documents\Visual Studio 2017\Projects\FunctionalProgramming\FunctionalProgramming\FunctionalProgramming.csproj", "{1316F872-7ABA-4FDD-9E02-88A1E72FE107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionalProgramming", "FunctionalProgramming\FunctionalProgramming.csproj", "{00C3DED3-8E73-4BE6-837D-4A7036F6ADCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{8BB5C921-2B24-4AD7-9767-431133C4FBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BB5C921-2B24-4AD7-9767-431133C4FBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BB5C921-2B24-4AD7-9767-431133C4FBA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1316F872-7ABA-4FDD-9E02-88A1E72FE107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1316F872-7ABA-4FDD-9E02-88A1E72FE107}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1316F872-7ABA-4FDD-9E02-88A1E72FE107}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1316F872-7ABA-4FDD-9E02-88A1E72FE107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C3DED3-8E73-4BE6-837D-4A7036F6ADCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C3DED3-8E73-4BE6-837D-4A7036F6ADCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C3DED3-8E73-4BE6-837D-4A7036F6ADCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C3DED3-8E73-4BE6-837D-4A7036F6ADCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

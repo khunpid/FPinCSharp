@@ -51,6 +51,11 @@ namespace FunctionalProgramming
                         .Count()
                         .Print("Project Euler #29 Alternative");
 
+            BigInteger number = 123456789;
+
+            number.NumberFactorize()
+                  .Print("Factorizing number");
+
         }
 
         public static BigInteger Power(BigInteger n, BigInteger expo)
@@ -81,6 +86,18 @@ namespace FunctionalProgramming
         public static string JoinToStringWith(this IEnumerable<string> list, string separator)
         {
             return string.Join(separator, list);
+        }
+
+        public static IEnumerable<BigInteger> NumberFactorize(this BigInteger number)
+        {
+            var firstPart = Factorize(number, () => Utility.SeqFrom(2).TakeWhile(x => x + x <= number));
+            return firstPart.Union(firstPart.Skip(1).Select(x => number / x)).OrderBy(x => x);
+        }
+        public static IEnumerable<BigInteger> Factorize(BigInteger number, Func<IEnumerable<BigInteger>> factor)
+        {
+            var numberList = factor();
+            var factorizer = new[] { BigInteger.One }.Concat(numberList.Where(x => number % x == 0));
+            return factorizer;
         }
     }
 }

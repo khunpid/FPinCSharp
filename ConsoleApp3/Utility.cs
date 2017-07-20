@@ -43,6 +43,28 @@ namespace ProblemSolving
             return SeqFrom(v % 2 == BigInteger.Zero ? v : v + 1, 2);
         }
 
+        public static void Print<T>(this IEnumerable<T> list, string description)
+        {
+            Console.WriteLine($"{description}");
+            Console.WriteLine($"[{list.JoinToStringWith(",")}]");
+            Console.WriteLine();
+        }
+        public static void Print<T>(this T number, string description)
+        {
+            Console.WriteLine($"{description}");
+            Console.WriteLine($"{number}");
+            Console.WriteLine();
+        }
+
+        public static string JoinToStringWith<T>(this IEnumerable<T> list, string separator)
+        {
+            return list.Select(e => e.ToString()).JoinToStringWith(",");
+        }
+
+        public static string JoinToStringWith(this IEnumerable<string> list, string separator)
+        {
+            return string.Join(separator, list);
+        }
 
         /// <summary>
         /// This is from 

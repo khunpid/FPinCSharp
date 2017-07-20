@@ -19,10 +19,11 @@ namespace ProblemSolving
             //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P67()).ReportTime();       // 
             //MeasureAndReport.MeasureRunTime(() => ProjectEuler.P104_2()).ReportTime();    // 329468 - 245681739....352786941
             //Console.ReadLine();
-            Console.Write("{0}", MyClass.PrimeFactorize2(10011231).Select(x => x.ToString()).StringJoin(","));
+
+            Console.Write("{0}", MyClass.NumberFactorize2(28).Select(x => x.ToString()).StringJoin(","));
             Console.WriteLine();
-            Console.Write("{0}", MyClass.NumberFactorize2(10011231).Select(x => x.ToString()).StringJoin(","));
-            Console.WriteLine();
+            MeasureAndReport.MeasureRunTime(() => ProjectEuler.P23()).ReportTime();
+
             //MyClass.PrimeFactorize(105191919).ToList().ForEach(x => Console.Write("{0},", x));
             //Console.WriteLine();
         }

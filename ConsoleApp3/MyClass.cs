@@ -211,12 +211,12 @@ namespace ProblemSolving
         public static IEnumerable<BigInteger> NumberFactorize2(this BigInteger number)
         {
             var firstPart = Factorize2(number, () => Utility.SeqFrom(2).TakeWhile(x => x + x <= number));
-            return firstPart.Union(firstPart.Select(x => number / x)).OrderBy(x => x);
+            return firstPart.Union(firstPart.Skip(1).Select(x => number / x)).OrderBy(x => x);
         }
         public static IEnumerable<BigInteger> Factorize2(BigInteger number, Func<IEnumerable<BigInteger>> factor)
         {
             var numberList = factor();
-            var factorizer = new[] { BigInteger.One }.Concat(numberList.AsParallel().Where(x => number % x == 0));
+            var factorizer = new[] { BigInteger.One }.Concat(numberList.Where(x => number % x == 0));
             return factorizer;
         }
 

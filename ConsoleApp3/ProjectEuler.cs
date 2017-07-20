@@ -42,6 +42,13 @@ namespace ProblemSolving
             return theValue;
         }
 
+        public static BigInteger P23()
+        {
+            var perfectList = Utility.SeqFromTo(2, 28123).Where(x => MyClass.NumberFactorize2(x).Aggregate((a, b) => a + b) == x);
+            perfectList.Print("Perfect Number List");
+            return perfectList.Last();
+        }
+
         public static BigInteger P25()
         {
             var limit = MyClass.Power(10, 999);
