@@ -51,10 +51,10 @@ namespace FunctionalProgramming
                         .Count()
                         .Print("Project Euler #29 Alternative");
 
-            BigInteger number = 123456789;
+            //BigInteger number = 123456789;
 
-            number.NumberFactorize()
-                  .Print("Factorizing number");
+            //number.NumberFactorize()
+            //      .Print("Factorizing number");
 
         }
 
