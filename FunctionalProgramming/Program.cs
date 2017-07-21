@@ -14,8 +14,8 @@ namespace FunctionalProgramming
 
             OpenJaw.OpenJawDemo("MEL-BKK-KUL", "SIN-LON-BKK-MEL");
             OpenJaw.OpenJawDemo("MEL-BKK-KUL", "SIN-LON-PAR-NYC-MEL");
-
-
+            OpenJaw.OpenJawDemo("MEL-BKK-SYD");
+            OpenJaw.OpenJawDemo("MEL-SYD-BKK-SYD");
         }
 
     }
