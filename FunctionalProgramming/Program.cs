@@ -13,6 +13,9 @@ namespace FunctionalProgramming
             HigherOrderFunctions.DemoHigherOrderFunctions();
             Imperative.DemoImperative();
 
+
+            Honesty.HonestyDemo();
+
             OpenJaw.OpenJawDemo("MEL-BKK-KUL", "SIN-LON-BKK-MEL");
             OpenJaw.OpenJawDemo("MEL-BKK-KUL", "SIN-LON-PAR-NYC-MEL");
             OpenJaw.OpenJawDemo("MEL-BKK-SYD");

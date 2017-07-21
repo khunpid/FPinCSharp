@@ -46,7 +46,7 @@ namespace FunctionalProgramming
                 }
                 else if (i == 920)
                 {
-                    Console.Write("[{0},");
+                    Console.Write("[{0},", i);
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace FunctionalProgramming
                     }
                     else if (take == 0)
                     {
-                        Console.Write("[{0},");
+                        Console.Write("[{0},", i);
                     }
                     else
                     {

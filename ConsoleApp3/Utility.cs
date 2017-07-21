@@ -14,7 +14,10 @@ namespace ProblemSolving
         }
         public static IEnumerable<BigInteger> SeqFromTo(BigInteger from, BigInteger to, BigInteger step)
         {
-            return SeqFrom(from, step).TakeWhile(x => x <= to);
+            return SeqFrom(from, step).TakeWhile(x =>
+            {
+                return step > 0 ? x <= to : x >= to;
+            });
         }
             public static IEnumerable<BigInteger> SeqFromTo(BigInteger from, BigInteger to)
         {

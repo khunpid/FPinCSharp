@@ -14,16 +14,19 @@ namespace FunctionalProgramming
         }
         public static IEnumerable<BigInteger> SeqFromTo(BigInteger from, BigInteger to, BigInteger step)
         {
-            return SeqFrom(from, step).TakeWhile(x => x <= to);
+            return SeqFrom(from, step).TakeWhile(x =>
+            {
+                return step > 0 ? x <= to : x >= to;
+            });
         }
-            public static IEnumerable<BigInteger> SeqFromTo(BigInteger from, BigInteger to)
+        public static IEnumerable<BigInteger> SeqFromTo(BigInteger from, BigInteger to)
         {
-            return SeqFromTo(from, to, BigInteger.One);
+            return SeqFromTo(from, to, 1);
         }
 
         public static IEnumerable<BigInteger> SeqFrom(BigInteger v)
         {
-            return SeqFrom(v, BigInteger.One);
+            return SeqFrom(v, 1);
         }
 
         public static IEnumerable<BigInteger> SeqFrom(BigInteger v, BigInteger step)
