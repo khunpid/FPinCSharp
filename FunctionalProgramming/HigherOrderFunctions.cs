@@ -14,16 +14,9 @@ namespace FunctionalProgramming
 
         public static void DemoHigherOrderFunctions()
         {
-            /// Take
-            /// Haskell
-            /// someSeq = [0..1000]
-            /// take 20 someSeq
             someSeq.Take(20)
                    .Print("Take 20: ");
 
-            /// Where
-            /// HasKell
-            /// take 20 (filter (>920) someSeq)
             someSeq.Where(x => x > 920)
                    .Take(20)
                    .Print("Where > 920 && Take 20: ");
@@ -35,7 +28,7 @@ namespace FunctionalProgramming
                    .Print("take first 20 elements of number Divisible by 2, 3, 5");
 
             someSeq.Aggregate((x, y) => x + y)
-                   .Print("Some of the list from 0 to 1000");
+                   .Print("Sum of the list from 0 to 1000");
 
             someSeq.Zip(someSeq.Reverse(), (x, y) => (x, y))
                    .Take(10)

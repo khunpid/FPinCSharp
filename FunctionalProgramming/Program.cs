@@ -11,6 +11,7 @@ namespace FunctionalProgramming
         {
             Console.WriteLine("Hello World!");
             HigherOrderFunctions.DemoHigherOrderFunctions();
+            Imperative.DemoImperative();
 
             OpenJaw.OpenJawDemo("MEL-BKK-KUL", "SIN-LON-BKK-MEL");
             OpenJaw.OpenJawDemo("MEL-BKK-KUL", "SIN-LON-PAR-NYC-MEL");
