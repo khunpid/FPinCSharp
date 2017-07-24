@@ -15,7 +15,7 @@ namespace FunctionalProgramming
             IEnumerable<FlightSegment> allSegments = flightQuery.FlightSegments;
             return (allOpenJaws, allSegments.Except(allOpenJawsFlatten));
         }
-        public static IEnumerable<IEnumerable<FlightSegment>> AllOpenJawsInternal(this FlightQuery flightQuery)
+        private static IEnumerable<IEnumerable<FlightSegment>> AllOpenJawsInternal(this FlightQuery flightQuery)
         {
             var head = flightQuery.FlightSegments.First();
             var tail = flightQuery.FlightSegments.Skip(1);
@@ -25,18 +25,18 @@ namespace FunctionalProgramming
 
             if (tail.Count() >= 1)
             {
+                // Modify this part to change the logic for the OpenJaw
                 var openJaw = tail.Where(elem => elem.Destination == head.Origin && elem.Departure > head.Departure);
-                var other = tail.Except(openJaw);
                 if (openJaw.Any())
                 {
+                    var theRest = tail.Except(openJaw);
                     return new[] { openJaw.Prepend(head) }.Concat(
-                        other.Any()
-                            ? new FlightQuery { FlightSegments = other.ToArray() }.AllOpenJawsInternal()
+                        theRest.Any()
+                            ? new FlightQuery { FlightSegments = theRest.ToArray() }.AllOpenJawsInternal()
                             : new List<IEnumerable<FlightSegment>>().ToArray());
                 }
                 else
                 {
-                    tail.Print("tail");
                     return new FlightQuery { FlightSegments = tail.ToArray() }.AllOpenJawsInternal();
                 }
             }
