@@ -8,23 +8,22 @@ namespace FunctionalProgramming
 {
     public static class Honesty
     {
-        public static TimeSpan CalculateAge1(DateTime dateToCheck)
+        public static TimeSpan Aging1(DateTime fromDate)
         {
-            var now = DateTime.Now;
-            return now - dateToCheck;
+            return DateTime.Now - fromDate;
         }
 
-        public static TimeSpan CalculateAge2(DateTime dateToCheck, DateTime toDate)
+        public static TimeSpan Aging(DateTime fromDate, DateTime toDate)
         {
-            return toDate - dateToCheck;
+            return toDate - fromDate;
         }
 
-        public static double Reciprocal(this BigInteger number)
+        public static double Reciprocal1(this BigInteger number)
         {
             return 1.0 / (double)number;
         }
 
-        public static Nullable<double> Reciprocal2(this BigInteger number)
+        public static Nullable<double> Reciprocal(this BigInteger number)
         {
             if (number == 0) return null;
             return 1.0 / (double)number;
@@ -37,20 +36,37 @@ namespace FunctionalProgramming
         }
         public static void HonestyDemo()
         {
-            Console.WriteLine("Age1 {0}", Honesty.CalculateAge1(new DateTime(2017, 1, 1)));
-            Console.WriteLine("Age1 {0}", Honesty.CalculateAge1(new DateTime(2017, 1, 1)));
-            Console.WriteLine("Age2 {0}", Honesty.CalculateAge2(new DateTime(2017, 1, 1), new DateTime(2017, 7, 21)));
-            Console.WriteLine("Age2 {0}", Honesty.CalculateAge2(new DateTime(2017, 1, 1), new DateTime(2017, 7, 21)));
-            Console.WriteLine("Age2 {0}", Honesty.CalculateAge2(new DateTime(2017, 1, 1), new DateTime(2017, 7, 21)));
-            Console.WriteLine("Age1 {0}", Honesty.CalculateAge1(new DateTime(2017, 1, 1)));
+            Console.WriteLine("Age {0}", Honesty.Aging1(new DateTime(2017, 1, 1)));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging1(new DateTime(2017, 1, 1)));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging1(new DateTime(2017, 1, 1)));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging1(new DateTime(2017, 1, 1)));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging1(new DateTime(2017, 1, 1)));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging1(new DateTime(2017, 1, 1)));
+            System.Threading.Thread.Sleep(100);
 
+            Console.WriteLine("Age {0}", Honesty.Aging(new DateTime(2017, 1, 1), DateTime.Now));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging(new DateTime(2017, 1, 1), DateTime.Now));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging(new DateTime(2017, 1, 1), DateTime.Now));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging(new DateTime(2017, 1, 1), DateTime.Now));
+            System.Threading.Thread.Sleep(100);
+            Console.WriteLine("Age {0}", Honesty.Aging(new DateTime(2017, 1, 1), DateTime.Now));
+            System.Threading.Thread.Sleep(100);
+
+            Utility.SeqFromTo(10, 0, -1).Select(elem => elem.Reciprocal1()).Print("The Reciprocal: ");
             Utility.SeqFromTo(10, 0, -1).Select(elem => elem.Reciprocal()).Print("The Reciprocal: ");
-            Utility.SeqFromTo(10, 0, -1).Select(elem => elem.Reciprocal2()).Print("The Reciprocal: ");
             Utility.SeqFromTo(10, 0, -1).Select(elem =>
             { try { return elem.Reciprocal3(); } catch { return default(double); } }).Print("The Reciprocal: ");
             Utility.SeqFromTo(10, 0, -1).Print("Teest");
             BigInteger x = 100;
-            Console.WriteLine(x.Reciprocal2());
+            Console.WriteLine(x.Reciprocal());
 
             /*
             for (BigInteger i = 10; i >= 0; i--)

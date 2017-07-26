@@ -20,7 +20,21 @@ namespace FunctionalProgramming
             OpenJaw.OpenJawDemo("MEL-BKK-KUL", "SIN-LON-PAR-NYC-MEL");
             OpenJaw.OpenJawDemo("MEL-BKK-SYD");
             OpenJaw.OpenJawDemo("MEL-SYD-BKK-SYD");
+
+            TestAndAdjustData();
+            Immutability.AddAndStore(5);
+            Immutability.AddAndStore(5);
+            Immutability.AddAndStore(5);
+
+            /// What should this print?
+            Console.WriteLine("Print Current = {0}", Immutability.accumulated);
+
         }
 
+        private static void TestAndAdjustData()
+        {
+            Console.WriteLine("Testing Data = {0}", Immutability.accumulated);
+            Immutability.accumulated = 11;
+        }
     }
 }

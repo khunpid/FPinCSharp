@@ -21,8 +21,8 @@ namespace FunctionalProgramming
                    .Take(20)
                    .Print("Where > 920 && Take 20: ");
 
-            Enumerable.Range(0, 1000)
-                   .Where(x => x % 2 == 0)
+                    //tail.Print("tail");
+            someSeq.Where(x => x % 2 == 0)
                    .Where(x => x % 3 == 0)
                    .Where(x => x % 5 == 0)
                    .Take(20)
@@ -87,24 +87,23 @@ namespace FunctionalProgramming
         public static IEnumerable<BigInteger> NumberFactorize(this BigInteger number)
         {
             var firstPart = Factorize
-                (
-                    number, 
-                    () => Utility.SeqFrom(2)
-                                 .TakeWhile(x => x + x <= number));
-                
-                return firstPart.Union(firstPart
-                            .Select(x => number / x))
-                            .Prepend(1)
-                            .OrderBy(x => x);
+            (
+                number, 
+                Utility.SeqFrom(2).TakeWhile(x => x + x <= number)
+            ).ToList();
+
+            return firstPart.Union
+            (
+                firstPart.Select(x => number / x)
+            ).OrderBy(x => x).Prepend(1);
         }
         public static IEnumerable<BigInteger> Factorize
         (
             BigInteger number, 
-            Func<IEnumerable<BigInteger>> list
+            IEnumerable<BigInteger> numberList
         )
         {
-            var factorizer = list().Where(x => number % x == 0);
-            return factorizer;
+            return numberList.Where(x => number % x == 0); 
         }
     }
 }
