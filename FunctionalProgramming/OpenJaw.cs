@@ -8,7 +8,8 @@ namespace FunctionalProgramming
     public static class OpenJaw
     {
 
-        public static (IEnumerable<IEnumerable<FlightSegment>> OJ, IEnumerable<FlightSegment> Other) AllOpenJaws(this FlightQuery flightQuery)
+        public static (IEnumerable<IEnumerable<FlightSegment>> OJ, IEnumerable<FlightSegment> Other) 
+            AllOpenJaws(this FlightQuery flightQuery)
         {
             var allOpenJaws = AllOpenJawsInternal(flightQuery);
             var allOpenJawsFlatten = allOpenJaws.SelectMany(x => x);
@@ -19,9 +20,6 @@ namespace FunctionalProgramming
         {
             var head = flightQuery.FlightSegments.First();
             var tail = flightQuery.FlightSegments.Skip(1);
-
-            var originList = flightQuery.FlightSegments.Select(segment => (segment.Origin, segment.Departure));
-            var destinationList = flightQuery.FlightSegments.Select(segment => (segment.Destination, segment.Departure));
 
             if (tail.Count() >= 1)
             {

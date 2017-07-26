@@ -21,16 +21,19 @@ namespace FunctionalProgramming
                    .Take(20)
                    .Print("Where > 920 && Take 20: ");
 
-            someSeq.Where(x => x % 2 == 0)
+            Enumerable.Range(0, 1000)
+                   .Where(x => x % 2 == 0)
                    .Where(x => x % 3 == 0)
                    .Where(x => x % 5 == 0)
                    .Take(20)
                    .Print("take first 20 elements of number Divisible by 2, 3, 5");
 
-            someSeq.Aggregate((x, y) => x + y)
+            Enumerable.Range(0, 1000)
+                .Aggregate((x, y) => x + y)
                    .Print("Sum of the list from 0 to 1000");
 
-            someSeq.Zip(someSeq.Reverse(), (x, y) => (x, y))
+            Enumerable.Range(0, 1000)
+                .Zip(someSeq.Reverse(), (x, y) => (x, y))
                    .Take(10)
                    .Print("Zip x and y to (x, y)");
 
@@ -83,13 +86,24 @@ namespace FunctionalProgramming
 
         public static IEnumerable<BigInteger> NumberFactorize(this BigInteger number)
         {
-            var firstPart = Factorize(number, () => Utility.SeqFrom(2).TakeWhile(x => x + x <= number));
-            return firstPart.Union(firstPart.Skip(1).Select(x => number / x)).OrderBy(x => x);
+            var firstPart = Factorize
+                (
+                    number, 
+                    () => Utility.SeqFrom(2)
+                                 .TakeWhile(x => x + x <= number));
+                
+                return firstPart.Union(firstPart
+                            .Select(x => number / x))
+                            .Prepend(1)
+                            .OrderBy(x => x);
         }
-        public static IEnumerable<BigInteger> Factorize(BigInteger number, Func<IEnumerable<BigInteger>> factor)
+        public static IEnumerable<BigInteger> Factorize
+        (
+            BigInteger number, 
+            Func<IEnumerable<BigInteger>> list
+        )
         {
-            var numberList = factor();
-            var factorizer = new[] { BigInteger.One }.Concat(numberList.Where(x => number % x == 0));
+            var factorizer = list().Where(x => number % x == 0);
             return factorizer;
         }
     }

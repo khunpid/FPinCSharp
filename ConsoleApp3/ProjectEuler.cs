@@ -34,6 +34,24 @@ namespace ProblemSolving
             return theValue;
         }
 
+        public static BigInteger P9()
+        {
+            var a = Utility.SeqFrom(1, 1000);
+            var b = Utility.SeqFrom(1, 1000);
+            var c = Utility.SeqFrom(1, 1000);
+
+            IEnumerable<(BigInteger product, BigInteger x, BigInteger y, BigInteger z)> result = a.SelectMany(x => b.SelectMany(y => c.Select(z =>
+            {
+                if (x + y + z == 1000 && x + y > z)
+                {
+                    return (x*y*z, x, y, z);
+                }
+
+                return (0, 0, 0, 0);
+            })));
+            return result.Where(x => x.product != 0).FirstOrDefault().product;
+        }
+
         public static BigInteger P10()
         {
             var notOver = 2000000;

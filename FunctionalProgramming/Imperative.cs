@@ -16,24 +16,13 @@ namespace FunctionalProgramming
 
         public static void DemoImperative()
         {
-
             Console.WriteLine();
             Console.WriteLine("Take 20: ");
-            for(int i = 0; i < 20; i++)
-            {
-                if (i == 20 - 1)
-                {
-                    Console.Write("{0}]", i);
-                }
-                else if (i == 0)
-                {
-                    Console.Write("[{0},");
-                }
-                else
-                {
-                    Console.Write("{0},", i);
-                }
-            }
+            //var itemList = new List<BigInteger>();
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    itemList.Add(i);
+            //}
             Console.WriteLine();
 
             Console.WriteLine();
@@ -58,26 +47,17 @@ namespace FunctionalProgramming
             Console.WriteLine();
             Console.WriteLine("take first 20 elements of number Divisible by 2, 3, 5");
             var take = 0;
-            for (int i = 0; i < to && take < 20; i++)
+            var itemList = new List<BigInteger>();
+            for (int i = 0; i < to && itemList.Count < 20; i++)
             {
-                if (i % 2 == 0 && i % 3 == 0 && i % 5 == 0)
+                if (i % 2 == 0 
+                    && i % 3 == 0 
+                    && i % 5 == 0)
                 {
-                    if (take == 20 - 1)
-                    {
-                        Console.Write("{0}]", i);
-                    }
-                    else if (take == 0)
-                    {
-                        Console.Write("[{0},", i);
-                    }
-                    else
-                    {
-                        Console.Write("{0},", i);
-                    }
-
-                    take++;
+                    itemList.Add(i);
                 }
             }
+
             Console.WriteLine();
 
             Console.WriteLine();
@@ -91,25 +71,14 @@ namespace FunctionalProgramming
             Console.WriteLine();
 
             Console.WriteLine();
-            var toTake = 0;
             Console.WriteLine("Zip x and y to (x, y)");
-            for(BigInteger i = from, j = to; i <= to; i++, j--)
+            var toTake = 0;
+            var tupleList = new List<(BigInteger, BigInteger)>();
+            for (BigInteger i = from, j = to; i <= to; i++, j--)
             {
                 if (toTake < 10)
                 {
-                    var temp = (i, j);
-                    if (toTake == 10 - 1)
-                    {
-                        Console.Write("{0}]", temp);
-                    }
-                    else if (i == from)
-                    {
-                        Console.Write("[{0},", temp);
-                    }
-                    else
-                    {
-                        Console.Write("{0},", temp);
-                    }
+                    tupleList.Add((i, j));
                 }
 
                 toTake++;
